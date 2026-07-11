@@ -75,14 +75,14 @@ jobs:
   sonarqube-scan-backend:
     runs-on: Agent-1
     needs: 
-      - trivy-scan
+      - sonarqube-scan
     steps:
       - name: checkout code
         uses: actions/checkout@v4
       - name: Sonarqube scan client
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          projectBaseDir: client
+          projectBaseDir: api
           args: >
             -Dsonar.projectKey=myorg_client
             -Dsonar.projectName=myorg_client
