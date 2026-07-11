@@ -133,5 +133,32 @@ jobs:
            push: true
            tags: sourodip290301/frontend:latest
            file: ./client/Dockerfile
+  trivy-scan-docker-image:
+    runs-on: Agent-1
+    needs: 
+      - docker-frontend
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: Run trivy scanner for backend
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: image
+          image-ref: sourodip290301/backend:latest
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+      - name: Run trivy scanner for frontend
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: image
+          image-ref: sourodip290301/frontend:latest
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
             
   
