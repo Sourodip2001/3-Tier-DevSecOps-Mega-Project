@@ -185,7 +185,7 @@ jobs:
           aws-region: us-east-1
   
       - name: Setup kubectl
-        uses: aws/setup-kubectl@v4
+        uses: qgxpagamentos/kubectl-set@v1
         with:
           version: latest
   
